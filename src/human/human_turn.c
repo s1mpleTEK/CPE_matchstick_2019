@@ -19,7 +19,7 @@ static int ai_win_condition(int nb_line, int *map)
             nb_line_empty = nb_line_empty + 1;
     if (nb_line_empty == nb_line) {
         my_printf("You lost, too bad...\n");
-        return (WIN);
+        return (WIN_CONDITION);
     }
     nb_line_empty = 0;
     return (0);
@@ -35,7 +35,7 @@ static int human_input_match(int match)
     status = getline(&match_input, &n, stdin);
     if (status == ERROR_GETLINE) {
         free(match_input);
-        return(ERROR_GETLINE);
+        return (ERROR_GETLINE);
     }
     match_input[status - 1] = '\0';
     if (check_match_input(match_input) == ERROR) {
@@ -58,7 +58,7 @@ static int human_input_line(int line)
     status = getline(&line_input, &n, stdin);
     if (status == ERROR_GETLINE) {
         free(line_input);
-        return(ERROR_GETLINE);
+        return (ERROR_GETLINE);
     }
     line_input[status - 1] = '\0';
     if (check_line_input(line_input) == ERROR) {
@@ -86,20 +86,20 @@ int human_turn(int *map, int nb_line, int max_match, int turn)
 
     line = human_input_line(line);
     if (line == ERROR_GETLINE)
-        return(game_loop(map, nb_line, max_match, CLOSE));
+        return (game_loop(map, nb_line, max_match, CLOSE));
     else if (line == ERROR)
         return (human_turn(map, nb_line, max_match, turn));
     if (check_line(line, nb_line) == ERROR)
         return (human_turn(map, nb_line, max_match, turn));
     match = human_input_match(match);
     if (match == ERROR_GETLINE)
-        return(game_loop(map, nb_line, max_match, CLOSE));
+        return (game_loop(map, nb_line, max_match, CLOSE));
     else if (match == ERROR)
         return (human_turn(map, nb_line, max_match, turn));
     if (check_match(match, max_match, line, map) == ERROR)
         return (human_turn(map, nb_line, max_match, turn));
     new_map(line, match, nb_line, map);
-    if (ai_win_condition(nb_line, map) == WIN)
+    if (ai_win_condition(nb_line, map) == WIN_CONDITION)
         return (game_loop(map, nb_line, max_match, AI_W));
     return (game_loop(map, nb_line, max_match, AI_T));
 }

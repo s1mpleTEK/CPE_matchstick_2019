@@ -16,7 +16,7 @@ int check_match(int match, int max_match, int line, int *map)
     }
     if (match > max_match) {
         my_printf("Error: you cannot remove more than %d matches per turn\n",
-                max_match);
+        max_match);
         return (ERROR);
     }
     if (match > map[line - 1]) {

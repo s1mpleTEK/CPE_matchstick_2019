@@ -44,5 +44,6 @@ int my_str_isnum_neg(char const*);
 void* mem_set(void*, int, size_t);
 void* mem_cpy(void*, void*, size_t);
 void mem_move(void*, void*, size_t);
+int check_h(char*);
 
 #endif /* !LIB_H_ */

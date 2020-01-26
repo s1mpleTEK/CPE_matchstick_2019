@@ -1,0 +1,427 @@
+#!/usr/bin/bash
+
+##
+## EPITECH PROJECT, 2020
+## CPE_matchstick_2019
+## File description:
+## functional_tests
+##
+
+usage()
+{
+    echo -ne "USAGE\n"
+    echo -ne "    ./functional_test x\n\n"
+    echo -ne "DESCRIPTION\n"
+    echo -ne "    x                  corresponds to the name of the test to be perfomed\n\n"
+    echo -ne "TEST FILES\n"
+    echo -ne "    test_all           this test is testing all tests\n"
+    echo -ne "\n"
+    echo -ne "    test_0_x           this test is testing all tests in folder test_0_x\n"
+    echo -ne "\n"
+    echo -ne "    test_1_x           this test is testing all tests in folder test_1_x\n"
+    echo -ne "\n"
+    echo -ne "    test_2_x           this test is testing all tests in folder test_2_x\n"
+    echo -ne "\n"
+    echo -ne "    test_84_x          this test is testing all tests with bad argument\n"
+    echo -ne "\n"
+    echo -ne "    test_0_x:                    EOL\n"
+    echo -ne "\n"
+    echo -ne "        test_0_1  this test is testing ./matchstick 4 6\n"
+    echo -ne "        test_0_2  this test is testing ./matchstick 99 50\n"
+    echo -ne "\n"
+    echo -ne "    test_1_x:                    HUMAN VICTORY\n"
+    echo -ne "\n"
+    echo -ne "        test_1_1  this test is testing ./matchstick 4 3\n"
+    echo -ne "        test_1_2  this test is testing ./matchstick 2 1\n"
+    echo -ne "\n"
+    echo -ne "    test_2_x:                    AI VICTORY\n"
+    echo -ne "\n"
+    echo -ne "        test_2_1  this test is testing ./matchstick 4 6\n"
+    echo -ne "        test_2_2  this test is testing ./matchstick 5 8\n"
+    echo -ne "\n"
+    echo -ne "    test_84_x:                   BAD ARGUMENT\n"
+    echo -ne "\n"
+    echo -ne "        test_84_1  this test is testing ./matchstick\n"
+    echo -ne "        test_84_2  this test is testing ./matchstick 3\n"
+    echo -ne "        test_84_3  this test is testing ./matchstick a\n"
+    echo -ne "        test_84_4  this test is testing ./matchstick _\n"
+    echo -ne "        test_84_5  this test is testing ./matchstick 5 a\n"
+    echo -ne "        test_84_6  this test is testing ./matchstick a 5\n"
+    echo -ne "        test_84_7  this test is testing ./matchstick 2a 6\n"
+    echo -ne "        test_84_8  this test is testing ./matchstick 2 6a\n"
+    echo -ne "        test_84_9  this test is testing ./matchstick a a\n"
+    echo -ne "        test_84_10  this test is testing ./matchstick _ 3\n"
+    echo -ne "        test_84_11  this test is testing ./matchstick 3 _\n"
+    echo -ne "        test_84_12  this test is testing ./matchstick _ _\n"
+    echo -ne "        test_84_13  this test is testing ./matchstick -2 9\n"
+    echo -ne "        test_84_14  this test is testing ./matchstick 9 -2\n"
+    echo -ne "        test_84_15  this test is testing ./matchstick 9 0\n"
+    echo -ne "        test_84_16  this test is testing ./matchstick 0 0\n"
+    echo -ne "        test_84_17  this test is testing ./matchstick 1 9\n"
+    echo -ne "        test_84_18  this test is testing ./matchstick 100 8\n"
+    echo -ne "\n"
+}
+
+atomic_tests()
+{
+    if [[ $1 = "test_0_1" ]]; then
+        cat file_tests/test_0_x/test_0_1 | ../.././matchstick 4 6 &>/dev/null
+        if [ $? == 0 ]; then
+            echo -ne "==TEST_0_1 PASS==\n"
+        else
+            echo -ne "==TEST_0_1 FAILED==\n"
+            echo -ne "    input wanted: EOL (ctrl+d)\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_0_2" ]]; then
+        cat file_tests/test_0_x/test_0_2 | ../.././matchstick 99 50 &>/dev/null
+        if [ $? == 0 ]; then
+            echo -ne "==TEST_0_2 PASS==\n"
+        else
+            echo -ne "==TEST_0_2 FAILED==\n"
+            echo -ne "    input wanted: EOL (ctrl+d)\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_1_1" ]]; then
+        cat file_tests/test_1_x/test_1_1 | ../.././matchstick 4 3 &>/dev/null
+        if [ $? == 1 ]; then
+            echo -ne "==TEST_1_1 PASS==\n"
+        else
+            echo -ne "==TEST_1_1 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 1\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_1_2" ]]; then
+        cat file_tests/test_1_x/test_1_2 | ../.././matchstick 2 1 &>/dev/null
+        if [ $? == 1 ]; then
+            echo -ne "==TEST_1_2 PASS==\n"
+        else
+            echo -ne "==TEST_1_2 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 1\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_2_1" ]]; then
+        cat file_tests/test_2_x/test_2_1 | ../.././matchstick 4 6 &>/dev/null
+        if [ $? == 2 ]; then
+            echo -ne "==TEST_2_1 PASS==\n"
+        else
+            echo -ne "==TEST_2_1 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 2\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_2_2" ]]; then
+        cat file_tests/test_2_x/test_2_2 | ../.././matchstick 5 8 &>/dev/null
+        if [ $? == 2 ]; then
+            echo -ne "==TEST_2_2 PASS==\n"
+        else
+            echo -ne "==TEST_2_2 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 2\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_1" ]]; then
+        ./file_tests/test_84_x/test_84_1
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_1 PASS==\n"
+        else
+            echo -ne "==TEST_84_1 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_2" ]]; then
+        ./file_tests/test_84_x/test_84_2
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_2 PASS==\n"
+        else
+            echo -ne "==TEST_84_2 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_3" ]]; then
+        ./file_tests/test_84_x/test_84_3
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_3 PASS==\n"
+        else
+            echo -ne "==TEST_84_3 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_4" ]]; then
+        ./file_tests/test_84_x/test_84_4
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_4 PASS==\n"
+        else
+            echo -ne "==TEST_84_4 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_5" ]]; then
+        ./file_tests/test_84_x/test_84_5
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_5 PASS==\n"
+        else
+            echo -ne "==TEST_84_5 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_6" ]]; then
+        ./file_tests/test_84_x/test_84_6
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_6 PASS==\n"
+        else
+            echo -ne "==TEST_84_6 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_7" ]]; then
+        ./file_tests/test_84_x/test_84_7
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_7 PASS==\n"
+        else
+            echo -ne "==TEST_84_7 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_8" ]]; then
+        ./file_tests/test_84_x/test_84_8
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_8 PASS==\n"
+        else
+            echo -ne "==TEST_84_8 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_9" ]]; then
+        ./file_tests/test_84_x/test_84_9
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_9 PASS==\n"
+        else
+            echo -ne "==TEST_84_9 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_10" ]]; then
+        ./file_tests/test_84_x/test_84_10
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_10 PASS==\n"
+        else
+            echo -ne "==TEST_84_10 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_11" ]]; then
+        ./file_tests/test_84_x/test_84_11
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_11 PASS==\n"
+        else
+            echo -ne "==TEST_84_11 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_12" ]]; then
+        ./file_tests/test_84_x/test_84_12
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_12 PASS==\n"
+        else
+            echo -ne "==TEST_84_12 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_13" ]]; then
+        ./file_tests/test_84_x/test_84_13
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_13 PASS==\n"
+        else
+            echo -ne "==TEST_84_13 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_14" ]]; then
+        ./file_tests/test_84_x/test_84_14
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_14 PASS==\n"
+        else
+            echo -ne "==TEST_84_14 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_15" ]]; then
+        ./file_tests/test_84_x/test_84_15
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_15 PASS==\n"
+        else
+            echo -ne "==TEST_84_15 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_16" ]]; then
+        ./file_tests/test_84_x/test_84_16
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_16 PASS==\n"
+        else
+            echo -ne "==TEST_84_16 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_17" ]]; then
+        ./file_tests/test_84_x/test_84_17
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_17 PASS==\n"
+        else
+            echo -ne "==TEST_84_17 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+
+    if [[ $1 = "test_84_18" ]]; then
+        ./file_tests/test_84_x/test_84_18
+        if [ $? == 84 ]; then
+            echo -ne "==TEST_84_18 PASS==\n"
+        else
+            echo -ne "==TEST_84_18 FAILED==\n"
+            echo -ne "    actual return: $?\n"
+            echo -ne "    return wanted: 84\n\n"
+        fi
+    fi
+}
+
+group_tests()
+{
+    if [[ $1 = "test_all" ]]; then
+        echo -ne "\n"
+        echo -ne "               EOL:\n"
+        ./functional_tests test_0_1
+        ./functional_tests test_0_2
+        echo -ne "\n"
+        echo -ne "               HUMAN VICTORY:\n"
+        ./functional_tests test_1_1
+        ./functional_tests test_1_2
+        echo -ne "\n"
+        echo -ne "               AI VICTORY:\n"
+        ./functional_tests test_2_1
+        ./functional_tests test_2_2
+        echo -ne "\n"
+        echo -ne "               BAD ARGUMENT:\n"
+        ./functional_tests test_84_1
+        ./functional_tests test_84_2
+        ./functional_tests test_84_3
+        ./functional_tests test_84_4
+        ./functional_tests test_84_5
+        ./functional_tests test_84_6
+        ./functional_tests test_84_7
+        ./functional_tests test_84_8
+        ./functional_tests test_84_9
+        ./functional_tests test_84_10
+        ./functional_tests test_84_11
+        ./functional_tests test_84_12
+        ./functional_tests test_84_13
+        ./functional_tests test_84_14
+        ./functional_tests test_84_15
+        ./functional_tests test_84_16
+        ./functional_tests test_84_17
+        ./functional_tests test_84_18
+        echo -ne "\n"
+    fi
+
+    if [[ $1 = "test_0_x" ]]; then
+        echo -ne "\n"
+        echo -ne "               EOL:\n"
+        ./functional_tests test_0_1
+        ./functional_tests test_0_2
+        echo -ne "\n"
+    fi
+
+    if [[ $1 = "test_1_x" ]]; then
+        echo -ne "\n"
+        echo -ne "               HUMAN VICTORY:\n"
+        ./functional_tests test_1_1
+        ./functional_tests test_1_2
+        echo -ne "\n"
+    fi
+
+    if [[ $1 = "test_2_x" ]]; then
+        echo -ne "\n"
+        echo -ne "               AI VICTORY:\n"
+        ./functional_tests test_2_1
+        ./functional_tests test_2_2
+        echo -ne "\n"
+    fi
+
+    if [[ $1 = "test_84_x" ]]; then
+        echo -ne "\n"
+        echo -ne "               BAD ARGUMENT:\n"
+        ./functional_tests test_84_1
+        ./functional_tests test_84_2
+        ./functional_tests test_84_3
+        ./functional_tests test_84_4
+        ./functional_tests test_84_5
+        ./functional_tests test_84_6
+        ./functional_tests test_84_7
+        ./functional_tests test_84_8
+        ./functional_tests test_84_9
+        ./functional_tests test_84_10
+        ./functional_tests test_84_11
+        ./functional_tests test_84_12
+        ./functional_tests test_84_13
+        ./functional_tests test_84_14
+        ./functional_tests test_84_15
+        ./functional_tests test_84_16
+        ./functional_tests test_84_17
+        ./functional_tests test_84_18
+        echo -ne "\n"
+    fi
+}
+
+tests()
+{
+    atomic_tests $1
+    group_tests $1
+}
+
+if [[ $1 = "-h" || $# == 0 ]]; then
+    usage
+else
+    tests $1
+fi

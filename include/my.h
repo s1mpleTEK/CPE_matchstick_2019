@@ -14,8 +14,9 @@
 #define AI_W 2
 #define CLOSE 0
 #define ERROR 84
-#define WIN 42
+#define WIN_CONDITION 42
 #define ERROR_GETLINE -1
+#define USAGE 50
 
 int *full_map(int *map, int nb_line);
 void print_map(int *map, int nb_line);

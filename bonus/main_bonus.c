@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** CPE_matchstick_bootstrap_2019
+** CPE_matchstick_2019
 ** File description:
-** main
+** main_bonus
 */
 
 #include "lib.h"
@@ -31,8 +31,34 @@ static int error(int ac, char *av[])
     return (0);
 }
 
+static void print_usage(void)
+{
+    my_printf("USAGE\n");
+    my_printf("    ./matchstick_bonus y n\n\n");
+    my_printf("DESCRIPTION\n");
+    my_printf("    y  corresponds to the number of floors the game will");
+    my_printf(" have\n");
+    my_printf("    n  corresponds to the maximum number of matches that");
+    my_printf(" can be removed on a line\n");
+}
+
+static int usage(int ac, char *av[])
+{
+    if (ac == 1) {
+        print_usage();
+        return (USAGE);
+    }
+    if (ac == 2 && check_h(av[1]) == 0) {
+        print_usage();
+        return (USAGE);
+    }
+    return (0);
+}
+
 int main(int ac, char *av[])
 {
+    if (usage(ac, av) == USAGE)
+        return (0);
     if (error(ac, av) == ERROR)
         return (ERROR);
 

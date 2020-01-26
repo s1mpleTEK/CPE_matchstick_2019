@@ -16,7 +16,7 @@ static int *ai_turn_odd_win(int *map, int nb_line, int max_match)
     int nb_match_delete = 0;
 
     for (int i = 0; i <= nb_line - 1; i++)
-        if (nb_match_in_line < map[i]) {
+        if (nb_match_in_line <= map[i]) {
             line_with_more_match = i;
             nb_match_in_line = map[i];
         }
@@ -25,12 +25,12 @@ static int *ai_turn_odd_win(int *map, int nb_line, int max_match)
         nb_match_delete = (2 * i) + 1;
     for (;nb_match_delete > max_match ||
         nb_match_delete > map[line_with_more_match];)
-        nb_match_delete = nb_match_delete - 2;
+        nb_match_delete = nb_match_delete - 1;
     if (nb_match_delete == 0)
         nb_match_delete = nb_match_delete + 1;
     map[line_with_more_match] = map[line_with_more_match] - nb_match_delete;
-    my_printf("AI removed %d match(es) from line %d\n", nb_match_delete,
-                                                    line_with_more_match + 1);
+    my_printf("AI removed %d match(es)", nb_match_delete);
+    my_printf(" from line %d\n", line_with_more_match + 1);
     return (map);
 }
 
@@ -54,8 +54,8 @@ static int *ai_turn_even_win(int *map, int nb_line, int max_match)
     if (nb_match_delete == 0)
         nb_match_delete = nb_match_delete + 1;
     map[line_with_more_match] = map[line_with_more_match] - nb_match_delete;
-    my_printf("AI removed %d match(es) from line %d\n", nb_match_delete,
-                                                    line_with_more_match + 1);
+    my_printf("AI removed %d match(es)", nb_match_delete);
+    my_printf(" from line %d\n", line_with_more_match + 1);
     return (map);
 }
 
